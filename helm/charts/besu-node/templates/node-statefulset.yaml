@@ -38,7 +38,9 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: {{ .Release.Name }}
     spec:
+{{- if  eq .Values.deploy.nat "false"}}    
       nodeName: {{ .Values.deploy.workerName }}
+ {{- end }} #end  workerName     
       containers:
 {{- if  eq .Values.deploy.typenode "tessera"}}
         - name:  {{ .Release.Name }}-tessera
