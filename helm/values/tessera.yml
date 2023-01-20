@@ -80,6 +80,7 @@ deploy:
   tessera:
     peer: 192.168.1.1
   workerName: gke-david19-default-pool-445cd569-p3ed #<Name of the node worker where always the pod will be installed>
+  nat: "true" # choose true  use NAT Proxy Egress (RECOMMENDED)| false use workerName
   dnsName: lacchain.com #<Organization domain name>
   nodeName: open-protest-tessera-helm #<Node Name>
   nodeEmail: tech.support@lac-net.net  #<e-mail of the technical contact>

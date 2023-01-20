@@ -77,6 +77,7 @@ deploy:
     host: <P2P_Public_IP_Egress>
     port: 60606
   workerName: <Name of the node worker where always the pod will be installed>
+  nat: "true" # choose true  use NAT Proxy Egress (RECOMMENDED)| false use workerName
   dnsName: <Organization domain name>
   nodeName: <Node Name>
   nodeEmail: <e-mail of the technical contact>
