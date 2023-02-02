@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   besu: 
-    image: lacnetnetworks/lacchain-besu:21.1.6
+    image: lacnetnetworks/lacchain-besu:21.10.6
     container_name: writer-besu-protest
     environment:
       BESU_LOGGING: INFO
