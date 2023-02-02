@@ -12,8 +12,9 @@ then
 else
 	nombrepc=`hostname`
     ip=`curl ifconfig.me/ip`
-    email="demo1@martket.com"
-
+  
+    email=""
+    read -p "Enter your contact email: " email
     #changing the ip BESU_P2P_HOST
     sed -i "s/<PUBLIC IP>/$ip/" docker-compose-writer.yml
 
