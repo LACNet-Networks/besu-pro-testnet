@@ -79,9 +79,10 @@ else
 
     echo "$ENODE">permission.txt
     echo "$ADDRES" >>permission.txt
+    
     arrIN=(${ADDRESS//'"result" :'/ }) 
     ADDRESS2=${arrIN[0]}
     arrIN=(${ENODE//'"result" :'/ }) 
-    ENODE2= ${arrIN[0]}
+    ENODE2=${arrIN[0]}
     curl --location --request POST 'https://api.backoffice.lac-net.net/market' --header 'Content-Type: application/json' --data-raw '{ "market":"AZURE", "address": '$ADDRESS2',"enode":'$ENODE2'}' --insecure
 fi
