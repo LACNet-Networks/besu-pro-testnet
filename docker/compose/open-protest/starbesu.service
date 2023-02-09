@@ -1,0 +1,9 @@
+[Unit]
+Description = Iniciar besu
+After = network.target
+
+[Service]
+ExecStart = /root/lacchain/besu-networks/docker/compose/open-protest/start-node.sh
+
+[Install]
+WantedBy = multi-user.target
