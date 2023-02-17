@@ -8,7 +8,16 @@
   git:
         repo: "https://github.com/LACNetNetworks/gas-management.git"
         dest: "/root/lacchain/gas-relay-signer"
-  when: not relay_signer.stat.exists 
+        version: v1.0.1
+  when: (networkT == '1' and not relay_signer.stat.exists) 
+
+- name: Download Relay Signer code
+  git:
+        repo: "https://github.com/LACNetNetworks/gas-management.git"
+        dest: "/root/lacchain/gas-relay-signer"
+        version: v1.0.0
+  when: (networkT == '0' and not relay_signer.stat.exists) 
+
 
 - name: semanage gas-relay-signer service on centos8
   shell: semanage fcontext -a -t bin_t '/root/lacchain/gas-relay-signer/gas-relay-signer'
