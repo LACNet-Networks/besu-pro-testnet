@@ -30,11 +30,11 @@ services:
     networks:
       - lacchain
   relay:
-    image: lacnetnetworks/relay-signer-lacchain:1.0.0
+    image: lacnetnetworks/relay-signer-lacchain:1.0.1
     container_name: relay-signer-protest
     environment:
       HOST_BESU: writer-besu-protest
-      CONTRACT_ADDRESS: '0xAa135C93dD05dFBEdb6E0cCDd7f848Df7A43505e'
+      CONTRACT_ADDRESS: '0xa4B5eE2906090ce2cDbf5dfff944db26f397037D'
     ports:
       - 9001:9001
     volumes:
