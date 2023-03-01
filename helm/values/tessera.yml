@@ -35,7 +35,7 @@ node:
       nodesContract:
         enabled: true
       accountsContract:
-        enabled: false
+        enabled: true
 
     envBesuOpts: ""  
     metricsPush:

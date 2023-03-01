@@ -32,9 +32,9 @@ node:
   besu:
     permissions:
       nodesContract:
-        enabled: false
+        enabled: true
       accountsContract:
-        enabled: false
+        enabled: true
 
     envBesuOpts: ""  
     metricsPush:
