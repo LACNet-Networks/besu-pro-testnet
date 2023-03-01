@@ -125,7 +125,10 @@ image:
     pullPolicy: IfNotPresent
   relay:
     repository: lacnetnetworks/relay-signer-lacchain
-    tag: 1.0.0
+    mainnet:
+        tag: 1.0.0
+    openprotest:
+        tag: 1.0.1
     pullPolicy: IfNotPresent
     contract:
        openprotest: 0xAa135C93dD05dFBEdb6E0cCDd7f848Df7A43505e
