@@ -73,7 +73,11 @@ spec:
 {{- end }} #end node tessera
 {{- if or ( eq .Values.deploy.typenode "writer") ( eq .Values.deploy.typenode "tessera")}}
         - name: {{ .Release.Name }}-relay-signer
-          image: {{ .Values.image.relay.repository }}:{{ .Values.image.relay.tag }}
+{{- if eq .Values.deploy.network "open-protest-net" }}       
+          image: {{ .Values.image.relay.repository }}:{{ .Values.image.relay.openprotest.tag }}
+{{- else }}
+          image: {{ .Values.image.relay.repository }}:{{ .Values.image.relay.mainnet.tag }}
+{{- end }} 
           imagePullPolicy: {{ .Values.image.relay.pullPolicy }}
           resources:
             requests:
