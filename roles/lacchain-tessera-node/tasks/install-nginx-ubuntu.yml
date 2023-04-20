@@ -10,8 +10,6 @@
 
 - name: Add official nginx signing key
   shell: curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
-  args:
-    warn: false
 
 - name: Verify nignx proper key is configured
   shell: apt-key fingerprint ABF5BD827BD9BF62

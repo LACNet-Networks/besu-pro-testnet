@@ -14,5 +14,3 @@
     
 - name: start docker ethstats client
   shell: mkdir -p /opt/ethstats-cli && docker run -d --restart always --net host -v /opt/ethstats-cli/:/root/.config/configstore/ alethio/ethstats-cli --register --account-email {{node_email}} --node-name "{{node_name}}" --server-url {{vars['statsserver_' + network]}} --client-url ws://127.0.0.1:4546
-  args:
-    warn: false
