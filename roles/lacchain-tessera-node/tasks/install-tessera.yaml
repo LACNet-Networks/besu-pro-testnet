@@ -29,5 +29,3 @@
 
 - name: clearing unnecessary folders
   shell: rm -rf /tmp/transit /tmp/tessera-app.jar
-  args:
-    warn: false

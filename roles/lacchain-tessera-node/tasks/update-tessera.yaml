@@ -4,9 +4,7 @@
       msg: "Updating Orion"
 
 - name: previous clearing
-  shell: rm -rf /tmp/orion && mkdir /tmp/orion
-  args:
-    warn: false      
+  shell: rm -rf /tmp/orion && mkdir /tmp/orion     
 
 - name: pull orion binaries
   get_url:
@@ -15,8 +13,6 @@
 
 - name: Preparing temporal folder
   shell: rm -rf /tmp/transit/ && mkdir /tmp/transit #deleting and creating a new
-  args:
-    warn: false
 
 - name: Extract the Orion tarball  
   unarchive:
@@ -31,8 +27,6 @@
 
 - name: Deleting old folders
   shell: rm -rf /usr/local/orion
-  args:
-    warn: false
 
 - name: moving files to /usr
   shell: mv /tmp/transit/orion /usr/local
@@ -64,5 +58,3 @@
 
 - name: clearing unnecessary folders
   shell: rm -rf /tmp/transit && rm -rf /tmp/orion
-  args:
-    warn: false

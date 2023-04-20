@@ -11,8 +11,6 @@
 
 - name: Move executable health-check program
   shell: mv /root/go/src/healthCheck/health-check /root/lacchain/health-check/
-  args:
-    warn: false
 
 - name: Copy service file to systemd
   copy:
@@ -22,8 +20,6 @@
 
 - name: Reload systemctl daemon
   shell: systemctl daemon-reload
-  args:
-    warn: false    
 
 - name: Enable service Health-Check
   service:

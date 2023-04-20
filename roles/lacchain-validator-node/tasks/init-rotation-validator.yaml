@@ -10,9 +10,7 @@
     mode: 0775
 
 - name: Reload systemctl daemon
-  shell: systemctl daemon-reload
-  args:
-    warn: false    
+  shell: systemctl daemon-reload   
 
 - name: Enable service Rotation Validator
   service:
