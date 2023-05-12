@@ -42,7 +42,12 @@
 
 - name: install docker for {{ ansible_distribution }}
   import_tasks: "install-docker-redhat.yaml"
-  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos') or (ansible_distribution |lower == 'oraclelinux')
+  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos')
+
+- name: install docker for {{ ansible_distribution }}
+  import_tasks: "install-docker-oracle.yaml"
+  when:  (ansible_distribution |lower == 'oraclelinux')
+
 
 
 - name: install Besu
