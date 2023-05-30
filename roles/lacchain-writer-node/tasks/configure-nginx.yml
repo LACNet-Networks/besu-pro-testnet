@@ -10,12 +10,19 @@
     mode: 0644 
   when: ansible_distribution |lower == 'ubuntu'
 
-- name: Copy centos ngix.conf file
+- name: Copy redhat ngix.conf file
   template:
     src: "{{ role_path }}/files/nginx-rhel-{{network}}.conf"
     dest: /etc/nginx/nginx.conf
     mode: 0644
-  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos')
+  when: (ansible_distribution |lower == 'redhat')
+
+- name: Copy centos ngix.conf file
+  template:
+    src: "{{ role_path }}/files/nginx-centos-{{network}}.conf"
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+  when: (ansible_distribution |lower == 'centos')
 
 - name: Copy ssl config file
   template:
