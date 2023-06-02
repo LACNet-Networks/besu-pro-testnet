@@ -4,12 +4,24 @@
       - wget
       - gnupg 
       - ca-certificates
-- name: import repo openresty
+
+- name: import repo openresty centos {{ansible_distribution_major_version }}
   shell: wget 'https://openresty.org/package/centos/openresty.repo'
   become: true
-- name: yum repositories.
-  shell: sudo mv openresty.repo /etc/yum.repos.d/
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version == "8")  
 
+- name: import repo openresty centos {{ansible_distribution_major_version }}
+  shell: wget 'https://openresty.org/package/centos/openresty2.repo'
+  become: true
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version == "9")  
+
+- name: yum repositories. centos {{ansible_distribution_major_version }}
+  shell: sudo mv openresty.repo /etc/yum.repos.d/
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version == "8")  
+
+- name: yum repositories. centos {{ansible_distribution_major_version }}
+  shell: sudo mv openresty2.repo /etc/yum.repos.d/openresty.repo
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version == "9")
 
 - name: install   openresty
   shell: dnf -y install openresty
@@ -18,7 +30,6 @@
 
 - name: install  openresty-resty
   shell: dnf -y install openresty-resty
-
 
 - name: install   openresty-opm
   shell: dnf -y install openresty-opm
@@ -34,3 +45,15 @@
 
 - name: loading it with the resty utility
   shell: resty -e 'require "resty.http"'
+
+- name: open port tcp 60606
+  shell: firewall-cmd --zone=public --permanent --add-port 60606/tcp
+  when: ((ansible_distribution |lower == 'centos') and ansible_distribution_major_version == "9")  
+
+- name: open port upd 60606
+  shell: firewall-cmd --zone=public --permanent --add-port 60606/udp
+  when: ((ansible_distribution |lower == 'centos') and ansible_distribution_major_version == "9") 
+
+- name: reload firewall
+  shell: firewall-cmd --reload
+  when: ((ansible_distribution |lower == 'centos') and ansible_distribution_major_version == "9") 

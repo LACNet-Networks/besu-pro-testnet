@@ -21,8 +21,7 @@
 
 - name: install dependencies for  {{ ansible_distribution }}
   import_tasks: "centos8-dependencies.yml"
-  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version == "8") 
-
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux') and ansible_distribution_major_version >= "8") 
 
 - name: install java for {{ ansible_distribution }}
   import_tasks: "install-java-ubuntu.yaml"
@@ -34,7 +33,7 @@
 
 - name: install java for {{ ansible_distribution }}
   import_tasks: "install-java-centos8.yaml"
-  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux' ) and ansible_distribution_major_version == "8")  
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'oraclelinux' ) and ansible_distribution_major_version >= "8")  
 
 - name: install docker for {{ ansible_distribution }}
   import_tasks: "install-docker-ubuntu.yaml"
