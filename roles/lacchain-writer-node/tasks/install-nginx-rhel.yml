@@ -1,17 +1,28 @@
 - name: install nginx prerequisites
   package:
-    name: yum-utils
+    name: epel-release
     state: present
 
 - name: Setup nginx repository
-  copy:
-    src: "{{ role_path }}/files/nginx.repo"
-    dest: /etc/yum.repos.d
-    mode: 0644
+  package:
+    name: http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+    state: present
+- name: sed nginx.rep.
+  shell:  sed -i -e 's@/packages/@/packages/mainline/@' /etc/yum.repos.d/nginx.repo
+
+- name: repo lua
+  shell:   sudo curl -L https://copr.fedorainfracloud.org/coprs/khara/nginx-module-ndk-lua/repo/epel-7/khara-nginx-module-ndk-lua-epel-7.repo -o /etc/yum.repos.d/nginx-module-ndk-lua.repo
 
 - name: install nginx
   package:
-    name: nginx
+    name: nginx-1.15.7
     state: present
     disable_gpg_check: yes
-  
+
+- name: install nginx lua
+  package:
+    name: nginx-module-lua 
+    state: present
+
+- name: fix redirect nginx http proxy
+  shell:  setsebool httpd_can_network_connect on -P 
