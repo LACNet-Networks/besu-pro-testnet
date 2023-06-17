@@ -41,12 +41,12 @@
     force: yes
 
 - name: semanage besu service on centos {{ansible_distribution_major_version}}
-  shell: semanage fcontext -a -t bin_t '/root/lacchain/start-pantheon.sh'
-  when: (ansible_distribution |lower == 'centos' and ansible_distribution_major_version >= "8") 
+  shell: sudo semanage fcontext -a -t bin_t '/root/lacchain/start-pantheon.sh'
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'redhat' ) and ansible_distribution_major_version >= "8")
 
 - name: restorecon besu service on centos {{ansible_distribution_major_version}}
-  shell: restorecon -Fv /root/lacchain/start-pantheon.sh
-  when: (ansible_distribution |lower == 'centos' and ansible_distribution_major_version >= "8") 
+  shell: sudo restorecon -Fv /root/lacchain/start-pantheon.sh
+  when: ((ansible_distribution |lower == 'centos'  or ansible_distribution |lower == 'redhat') and ansible_distribution_major_version >= "8") 
 
 
 - name: Generate Besu configuration file when Orion is Enabled
