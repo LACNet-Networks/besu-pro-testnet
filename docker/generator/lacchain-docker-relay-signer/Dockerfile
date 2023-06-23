@@ -22,7 +22,8 @@ COPY ./files/relay-signer-config.toml /opt/lacchain/gas-relay-signer/config.toml
 RUN chmod 0644 /opt/lacchain/gas-relay-signer/config.toml.template
 COPY --from=builder /go/bin /opt/lacchain/gas-relay-signer
 COPY ./files/startgas-relay-signer.sh /opt/lacchain/gas-relay-signer/startgas-relay-signer.sh
+COPY ./files/start.sh /opt/lacchain/gas-relay-signer/start.sh
 RUN chmod 755 /opt/lacchain/gas-relay-signer/startgas-relay-signer.sh
 RUN chmod 777 -R /opt/lacchain/gas-relay-signer
 ENTRYPOINT ["sh", "/opt/lacchain/gas-relay-signer/startgas-relay-signer.sh"]
-CMD [ "/opt/lacchain/gas-relay-signer/gas-relay-signer" ]
+CMD ["sh", "/opt/lacchain/gas-relay-signer/start.sh"]
