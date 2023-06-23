@@ -30,7 +30,7 @@ services:
     networks:
       - lacchain
   relay:
-    image: lacnetnetworks/relay-signer-lacchain:1.0.1
+    image: lacnetnetworks/relay-signer-lacchain:1.0.2
     container_name: relay-signer-protest
     environment:
       HOST_BESU: writer-besu-protest
