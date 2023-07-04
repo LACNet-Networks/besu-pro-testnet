@@ -43,6 +43,29 @@ parameters:
   type: pd-ssd
 reclaimPolicy: {{ .Values.cluster.reclaimPolicy }}
 allowVolumeExpansion: true
+
+{{- else }}
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "besu-node.fullname" . }}-storage
+  namespace: {{ .Release.Namespace }}
+  labels:
+    type: local
+spec:
+  persistentVolumeReclaimPolicy: {{ .Values.cluster.reclaimPolicy }}
+  storageClassName: {{ include "besu-node.fullname" . }}-storage
+  capacity:
+    storage: "{{ .Values.storage.sizeLimit }}"
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/{{ include "besu-node.fullname" . }}"
+
+{{- end }}
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -74,31 +97,11 @@ metadata:
 spec:
   storageClassName:  {{ include "besu-node.fullname" . }}-storage
   accessModes:
+{{- if ( eq .Values.cluster.type "aro" ) }} 
+    - ReadWriteMany
+{{- else }} 
     - ReadWriteOnce
+{{- end }}
   resources:
     requests:
       storage: 1Gi
-
-
-{{- else }}
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ include "besu-node.fullname" . }}-storage
-  namespace: {{ .Release.Namespace }}
-  labels:
-    type: local
-spec:
-  persistentVolumeReclaimPolicy: {{ .Values.cluster.reclaimPolicy }}
-  storageClassName: {{ include "besu-node.fullname" . }}-storage
-  capacity:
-    storage: "{{ .Values.storage.sizeLimit }}"
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/tmp/{{ include "besu-node.fullname" . }}"
-
-{{- end }}
-

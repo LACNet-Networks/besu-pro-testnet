@@ -40,7 +40,10 @@ spec:
     spec:
 {{- if  eq .Values.deploy.nat "false"}}    
       nodeName: {{ .Values.deploy.workerName }}
- {{- end }} #end  workerName     
+ {{- end }} #end  workerName  
+      {{- if ( eq .Values.cluster.type "aro" ) }} 
+      serviceAccount: sa-lacchain
+      {{- end }}    
       containers:
 {{- if  eq .Values.deploy.typenode "tessera"}}
         - name:  {{ .Release.Name }}-tessera
@@ -257,13 +260,20 @@ spec:
       labels:
         app: {{ template "besu-node.fullname" . }}-ethstats
     spec:
+      {{- if ( eq .Values.cluster.type "aro" ) }}
+      serviceAccount: sa-lacchain
+      {{- end }}
       containers:
         - name: {{ template "besu-node.fullname" . }}-ethstats
           image: alethio/ethstats-cli
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: ethstats-data
+              {{- if ( eq .Values.cluster.type "aro" ) }}
+              mountPath: /tmp/.config/configstore/
+              {{- else }}
               mountPath: /root/.config/configstore/
+              {{- end }}
           command:
             - /bin/sh
             - -c
