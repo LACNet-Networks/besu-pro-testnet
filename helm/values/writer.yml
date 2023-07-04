@@ -27,8 +27,11 @@ azure:
   tenantId: azure-tenantId
   # the subscription ID to use - this needs to be set explictly when using multi tenancy
   subscriptionId: azure-subscriptionId
-
-node:
+  storageClass:
+      location : <Locatio Resoursece> #eastus
+      storageAccount: <storageAccount>
+      resourceGroup: <resourceGroup>
+ node:
   besu:
     logging: INFO
     permissions:

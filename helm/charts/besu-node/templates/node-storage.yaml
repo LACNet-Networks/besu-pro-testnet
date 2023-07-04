@@ -9,14 +9,31 @@ provisioner: kubernetes.io/azure-file
 reclaimPolicy: {{ .Values.cluster.reclaimPolicy }}
 allowVolumeExpansion: true
 mountOptions:
+{{- if ( eq .Values.cluster.type "aro" ) }} 
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - cache=strict
+  - actimeo=30
+  - noperm
+{{- else }} 
   - dir_mode=0755
   - file_mode=0755
   - uid=1000
   - gid=1000
+{{- end }} 
   - mfsymlinks
 parameters:
   skuName: Standard_LRS
-
+{{- if ( eq .Values.cluster.type "aro" ) }} 
+  location: {{ .Values.azure.storageClass.location }}
+  storageAccount: {{ .Values.azure.storageClass.storageAccount }}
+  resourceGroup: {{ .Values.azure.storageClass.resourceGroup }}
+  secretNamespace: kube-system
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+{{- end }} 
 {{- else if eq .Values.cluster.provider "aws" }}
 ---
 apiVersion: storage.k8s.io/v1
