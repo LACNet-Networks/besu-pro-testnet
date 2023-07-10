@@ -25,7 +25,7 @@ mountOptions:
 {{- end }} 
   - mfsymlinks
 parameters:
-  skuName: Standard_LRS
+  skuName: Premium_LRS
 {{- if ( eq .Values.cluster.type "aro" ) }} 
   location: {{ .Values.azure.storageClass.location }}
   storageAccount: {{ .Values.azure.storageClass.storageAccount }}

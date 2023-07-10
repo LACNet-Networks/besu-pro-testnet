@@ -74,6 +74,7 @@ spec:
               name: tessera-besu
               protocol: TCP 
 {{- end }} #end node tessera
+{{- if eq .Values.deploy.relaysigner "true" }}    
 {{- if or ( eq .Values.deploy.typenode "writer") ( eq .Values.deploy.typenode "tessera")}}
         - name: {{ .Release.Name }}-relay-signer
 {{- if eq .Values.deploy.network "open-protest-net" }}       
@@ -130,6 +131,7 @@ spec:
               protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
+{{- end }}
 {{- end }} #end node writer
 {{- if and (eq .Values.deploy.typenode "validator")}}
         - name: {{ .Release.Name }}-rotation

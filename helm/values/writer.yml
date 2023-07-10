@@ -28,7 +28,7 @@ azure:
   # the subscription ID to use - this needs to be set explictly when using multi tenancy
   subscriptionId: azure-subscriptionId
   storageClass:
-      location : <Locatio Resoursece> #eastus
+      location : <Location Resoursece> #eastus
       storageAccount: <storageAccount>
       resourceGroup: <resourceGroup>
  node:
@@ -77,6 +77,7 @@ deploy:
   network:  open-protest-net # choose from: open-protest-net | protest-net | main-net
   typenode: writer
   publicIP:  <P2P_Public_IP>
+  relaysigner: "false"
   p2p:
     host: <P2P_Public_IP_Egress>
     port: 60606
