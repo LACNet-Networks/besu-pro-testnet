@@ -126,14 +126,14 @@ image:
   relay:
     repository: lacnetnetworks/relay-signer-lacchain
     mainnet:
-        tag: 1.0.0
+        tag: 1.0.1
     openprotest:
         tag: 1.0.1
     pullPolicy: IfNotPresent
     contract:
        openprotest: 0xa4B5eE2906090ce2cDbf5dfff944db26f397037D
        protest: 0xd4C70F66714D93a4f6553d379288e84bC45053da
-       mainnet: 0x7a4363E55Ef04e9144a2B187ACA804631A3155B5
+       mainnet: 0xEAA5420AF59305c5ecacCB38fcDe70198001d147
   rotation:
     repository: lacnetnetworks/rotation-lacchain
     tag: 1.0.0

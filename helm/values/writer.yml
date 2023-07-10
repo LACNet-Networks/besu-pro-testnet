@@ -10,7 +10,7 @@ cluster:
   provider: google  # choose from: google | aws | azure
   cloudNativeServices: false 
   reclaimPolicy: Delete # set to either Retain or Delete; note that PVCs and PVs will still exist after a 'helm delete'. Setting to Retain will keep volumes even if PVCs/PVs are deleted in kubernetes. Setting to Delete will remove volumes from EC2 EBS when PVC is deleted
-
+  type: aro # choose from: k8s, ocp, aro
 aws:
   # the aws cli commands uses the name 'quorum-node-secrets-sa' so only change this if you altered the name
   serviceAccountName: quorum-node-secrets-sa
@@ -27,8 +27,11 @@ azure:
   tenantId: azure-tenantId
   # the subscription ID to use - this needs to be set explictly when using multi tenancy
   subscriptionId: azure-subscriptionId
-
-node:
+  storageClass:
+      location : <Location Resoursece> #eastus
+      storageAccount: <storageAccount>
+      resourceGroup: <resourceGroup>
+ node:
   besu:
     logging: INFO
     permissions:
@@ -74,6 +77,7 @@ deploy:
   network:  open-protest-net # choose from: open-protest-net | protest-net | main-net
   typenode: writer
   publicIP:  <P2P_Public_IP>
+  relaysigner: "false"
   p2p:
     host: <P2P_Public_IP_Egress>
     port: 60606
