@@ -33,9 +33,9 @@ file_owner: pantheon
 
 oracle_java_apt_repository: "ppa:openjdk-r/ppa"
 oracle_java_cache_valid_time: 3600
-oracle_java_deb_package: "openjdk-11-jdk"
-oracle_java_debconf_package_default: "oracle-java11-set-default"
-oracle_java_home: "/usr/lib/jvm/java-11-oracle"
+oracle_java_deb_package: "openjdk-17-jdk"
+oracle_java_debconf_package_default: "oracle-java17-set-default"
+oracle_java_home: "/usr/lib/jvm/java-17-oracle"
 oracle_java_license_version: "shared/accepted-oracle-license-v1-2"
 oracle_java_state: latest
 
