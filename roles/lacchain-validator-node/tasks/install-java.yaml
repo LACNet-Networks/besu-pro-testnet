@@ -1,0 +1,8 @@
+---
+- name: install java 17 for  {{ ansible_distribution }}
+  import_tasks: "install-java-ubuntu.yaml"
+  when: ansible_distribution |lower == 'ubuntu'
+
+- name: install java 17 for  {{ ansible_distribution }}
+  import_tasks: "install-java-centos.yaml"
+  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos')

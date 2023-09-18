@@ -1,0 +1,22 @@
+---
+- name: Update java
+  debug:
+        msg: "Updating Java"
+
+- name: Store besu version in variable
+  shell: echo {{besu_release_version}} | cut -d'.' -f1
+  register: besu_parent_version
+
+- name: print besu version parent to upgrade
+  debug:
+    msg: "{{besu_parent_version.stdout}}"
+
+- name: uninstall Java 11
+  import_tasks: "uninstall-java.yaml" 
+  when: (besu_parent_version.stdout | int > 22)
+
+- name: install Java 17
+  import_tasks: "install-java.yaml"
+  when: (besu_parent_version.stdout | int > 22)
+
+

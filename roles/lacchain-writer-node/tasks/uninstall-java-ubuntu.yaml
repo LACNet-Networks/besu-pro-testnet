@@ -1,0 +1,14 @@
+---
+# file: oracle-java/tasks/installation/debian/main.yml
+#
+# Task file to uninstall Java Development Kit in a system with a Debian based Linux distribution.
+#
+
+#become: yes
+- name: debian | ensure Java is uninstalled
+  apt: name="openjdk-11-jdk"
+    state=absent
+    cache_valid_time={{ oracle_java_cache_valid_time }}
+    update_cache=yes
+  register: oracle_java_task_apt_install
+#become: yes
