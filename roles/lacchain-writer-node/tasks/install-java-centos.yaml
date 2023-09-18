@@ -3,3 +3,4 @@
     name:
       - "java-17-openjdk-devel"
       - "java-17-openjdk"
+    state: present

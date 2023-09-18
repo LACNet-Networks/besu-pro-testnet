@@ -1,26 +1,12 @@
 ---
+- name: Update Java version
+  import_tasks: "update-java.yaml"
+
 - name: stop Besu
   import_tasks: "stop-node.yaml" 
 
 - name: Update Besu Node
   import_tasks: "update-besu.yaml"
-
-- name: Verifying certificate is created
-  shell: ls /root/lacchain/orion/certificates | grep orion_cer.pem
-  register: certificate
-  ignore_errors: yes
-
-- name: Verifiying nginx is installed
-  shell: ls /lib/systemd/system/ | grep nginx.service
-  register: nginx
-  ignore_errors: yes
-
-- name: install nginx
-  import_tasks: "prepare-nginx.yml"
-#  when: (nginx.stdout != 'nginx.service')
-
-- name: install relay signer
-  import_tasks: "install-relay-signer.yaml"
 
 - name: start besu
   import_tasks: "start-node.yaml"

@@ -1,4 +1,7 @@
 ---
+- name: Update Java version
+  import_tasks: "update-java.yaml"
+  
 - name: stop Besu
   import_tasks: "stop-node.yaml" 
 
