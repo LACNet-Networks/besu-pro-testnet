@@ -1,0 +1,8 @@
+---
+- name: uninstall java 11 for  {{ ansible_distribution }}
+  import_tasks: "uninstall-java-ubuntu.yaml"
+  when: ansible_distribution |lower == 'ubuntu'
+
+- name: uninstall java 11 for  {{ ansible_distribution }}
+  import_tasks: "uninstall-java-centos.yaml"
+  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos')
