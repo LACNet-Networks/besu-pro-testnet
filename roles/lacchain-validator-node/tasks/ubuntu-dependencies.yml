@@ -11,7 +11,6 @@
       - git
       - make
       - gcc
-      #      - libsodium-dev
       - build-essential
       - libdb-dev
       - zlib1g-dev
@@ -20,3 +19,4 @@
       - psmisc
       - libdb5.3-dev
       - cron
+

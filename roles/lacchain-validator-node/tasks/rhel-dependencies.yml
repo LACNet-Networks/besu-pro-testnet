@@ -1,17 +1,32 @@
 ---
- - name: download epel repository
+ - name: download epel repository {{ ansible_distribution }} 
    get_url:
     url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
-    dest: "/tmp/epel-release-latest-7.noarch.rpm"
+    dest: "/opt/epel-release-latest-7.noarch.rpm"
+   when: ((ansible_distribution  == 'redhat' or ansible_distribution |lower == 'centos') and ansible_distribution_major_version == "7")
 
- - name: install epel repository
+ - name: install epel repository {{ ansible_distribution }} 
    yum:
-    name: "/tmp/epel-release-latest-7.noarch.rpm"
+    name: "/opt/epel-release-latest-7.noarch.rpm"
+   when: ((ansible_distribution  == 'redhat' or ansible_distribution |lower == 'centos') and ansible_distribution_major_version == "7")
+
+ - name: Install key repo {{ ansible_distribution }} {{ ansible_distribution_version }} 
+   rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+   when: (ansible_distribution |lower == 'redhat' and ansible_distribution_major_version >= "8") 
+   
+
+ - name: Install epel repo {{ ansible_distribution }} {{ ansible_distribution_version }}
+   yum:
+        name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm"
+        state: present
+   when: (ansible_distribution |lower == 'redhat' and ansible_distribution_major_version >= "8") 
 
  - name: install dependencies for {{ ansible_distribution }}
    yum:
     name:
-      - "*"
+      
       - "gmp-devel"
       - "gcc"
       - "gcc-c++"
