@@ -5,4 +5,4 @@
 
 - name: install java 17 for  {{ ansible_distribution }}
   import_tasks: "install-java-centos.yaml"
-  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'centos')
+  when: (ansible_distribution |lower == 'redhat') or (ansible_distribution |lower == 'rocky') or (ansible_distribution |lower == 'centos')
