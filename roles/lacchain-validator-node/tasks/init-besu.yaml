@@ -43,6 +43,15 @@
     mode: 0775
     force: yes
 
+- name: semanage besu service on centos {{ansible_distribution_major_version}}
+  shell: sudo semanage fcontext -a -t bin_t '/root/lacchain/start-pantheon.sh'
+  when: ((ansible_distribution |lower == 'centos' or ansible_distribution |lower == 'redhat' or ansible_distribution |lower == 'rocky') and ansible_distribution_major_version >= "8")
+
+- name: restorecon besu service on centos {{ansible_distribution_major_version}}
+  shell: sudo restorecon -Fv /root/lacchain/start-pantheon.sh
+  when: ((ansible_distribution |lower == 'centos'  or ansible_distribution |lower == 'redhat' or ansible_distribution |lower == 'rocky') and ansible_distribution_major_version >= "8") 
+
+
 - name: Generate Besu configuration file
   template:
     src: "pantheon-config-{{network}}.j2"

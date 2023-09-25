@@ -1,6 +1,7 @@
-- name: uninstall java 17 for {{ ansible_distribution }}
-  yum:
-    name:
-      - "java-11-openjdk-devel"
-      - "java-11-openjdk"
-    state: absent
+
+- name: uninstall java 11 for {{ ansible_distribution }}
+  shell: yum remove  java-11-openjdk-devel -y
+
+
+- name: uninstall java 11 for {{ ansible_distribution }}
+  shell: yum remove  java-11-openjdk -y

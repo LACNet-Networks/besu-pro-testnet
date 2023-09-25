@@ -1,0 +1,5 @@
+ - name: install java 17 for {{ ansible_distribution }}
+   yum:
+    name:
+      - "java-17-openjdk-devel"
+      - "java-17-openjdk"
