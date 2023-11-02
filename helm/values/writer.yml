@@ -31,7 +31,7 @@ azure:
       location : <Location Resoursece> #eastus
       storageAccount: <storageAccount>
       resourceGroup: <resourceGroup>
- node:
+node:
   besu:
     logging: INFO
     permissions:
