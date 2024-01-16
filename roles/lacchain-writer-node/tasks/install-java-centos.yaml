@@ -1,6 +1,5 @@
 - name: install java 17 for {{ ansible_distribution }}
-  yum:
-    name:
-      - "java-17-openjdk-devel"
-      - "java-17-openjdk"
-    state: present
+  shell: | 
+    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+    sudo yum -y install ./jdk-17_linux-x64_bin.rpm
+    java -version
